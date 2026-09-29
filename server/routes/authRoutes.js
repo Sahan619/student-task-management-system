@@ -28,16 +28,35 @@ db.query(sql, [name, email, hashedPassword], (err, result) => {
     });
 });
 
-router.post("/login", (req, res) => {
-    const { email, password } = req.body;
+router.post("/register", async (req, res) => {
+    const { name, email, password } = req.body;
 
-    console.log("Login request:");
-    console.log("Email:", email);
-    console.log("Password:", password);
+    try {
+        const hashedPassword = await bcrypt.hash(password, 10);
 
-    res.json({
-        message: "Login request received"
-    });
+        const sql = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
+
+        db.query(sql, [name, email, hashedPassword], (err, result) => {
+            if (err) {
+                console.error(err);
+
+                return res.status(500).json({
+                    message: "Registration failed"
+                });
+            }
+
+            return res.status(201).json({
+                message: "Registration successful"
+            });
+        });
+
+    } catch (error) {
+        console.error(error);
+
+        return res.status(500).json({
+            message: "Registration failed"
+        });
+    }
 });
 
 module.exports = router;

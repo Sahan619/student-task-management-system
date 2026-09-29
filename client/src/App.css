@@ -1,6 +1,6 @@
-/* =========================================
+/* =========================================================
    GLOBAL
-========================================= */
+========================================================= */
 
 * {
     margin: 0;
@@ -13,22 +13,30 @@ html {
 }
 
 body {
+    margin: 0;
+    padding: 0;
+
     font-family: "Segoe UI", Arial, sans-serif;
+
     background: #f5f7fb;
     color: #1f2937;
+
+    overflow-x: hidden;
 }
 
 .app {
+    width: 100%;
     min-height: 100vh;
 }
 
 
-/* =========================================
+/* =========================================================
    HOME SECTION
-========================================= */
+========================================================= */
 
 .home-section {
-    min-height: 500px;
+    width: 100%;
+    min-height: calc(100vh - 64px);
 
     display: flex;
     align-items: center;
@@ -36,7 +44,7 @@ body {
 
     text-align: center;
 
-    padding: 80px 20px;
+    padding: 60px 20px;
 
     background: linear-gradient(
         135deg,
@@ -46,41 +54,88 @@ body {
 }
 
 .home-content {
-    max-width: 800px;
+    width: 100%;
+    max-width: 720px;
 }
 
+
+/* Home heading */
+
 .home-content h1 {
-    font-size: 48px;
-    line-height: 1.15;
+    margin: 0 0 16px;
+
+    font-size: 40px !important;
+    line-height: 1.2 !important;
 
     font-weight: 700;
 
     color: #111827;
-
-    margin-bottom: 20px;
 }
 
 .home-content h1 span {
     color: #635bff;
 }
 
+
+/* Home description */
+
 .home-content p {
-    font-size: 18px;
-    line-height: 1.7;
+    max-width: 650px;
+
+    margin: 0 auto;
+
+    font-size: 10px !important;
+    line-height: 1.7 !important;
 
     color: #6b7280;
-
-    max-width: 650px;
-    margin: auto;
 }
 
 
-/* =========================================
+/* Optional home button */
+
+.home-button {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 25px;
+
+    height: 44px;
+
+    padding: 0 22px;
+
+    border: none;
+    border-radius: 7px;
+
+    background: #635bff;
+    color: #ffffff;
+
+    font-size: 14px !important;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    text-decoration: none;
+
+    transition: 0.2s ease;
+}
+
+.home-button:hover {
+    background: #5148e5;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
    ABOUT SECTION
-========================================= */
+========================================================= */
 
 .about-section {
-    padding: 80px 20px;
+    width: 100%;
+
+    padding: 70px 20px;
 
     text-align: center;
 
@@ -88,32 +143,37 @@ body {
 }
 
 .about-section h2 {
-    font-size: 32px;
+    margin: 0 0 15px;
+
+    font-size: 28px !important;
+    line-height: 1.2 !important;
+
     font-weight: 700;
 
     color: #111827;
-
-    margin-bottom: 20px;
 }
 
 .about-section p {
+    width: 100%;
     max-width: 700px;
 
-    margin: auto;
+    margin: 0 auto;
 
-    font-size: 16px;
-    line-height: 1.7;
+    font-size: 15px !important;
+    line-height: 1.7 !important;
 
     color: #6b7280;
 }
 
 
-/* =========================================
+/* =========================================================
    SERVICES SECTION
-========================================= */
+========================================================= */
 
 .services-section {
-    padding: 80px 20px;
+    width: 100%;
+
+    padding: 70px 20px;
 
     text-align: center;
 
@@ -121,164 +181,198 @@ body {
 }
 
 .services-section h2 {
-    font-size: 32px;
+    margin: 0 0 35px;
+
+    font-size: 28px !important;
+    line-height: 1.2 !important;
+
     font-weight: 700;
 
     color: #111827;
-
-    margin-bottom: 40px;
 }
 
+
+/* Services grid */
+
 .services-container {
+    width: 100%;
     max-width: 1000px;
 
-    margin: auto;
+    margin: 0 auto;
 
     display: grid;
 
     grid-template-columns: repeat(3, 1fr);
 
-    gap: 25px;
+    gap: 22px;
 }
+
+
+/* Service card */
 
 .service-card {
     background: #ffffff;
 
-    padding: 30px;
+    padding: 25px;
 
     border-radius: 12px;
 
     border: 1px solid #e5e7eb;
 
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.04);
 
-    transition: 0.3s ease;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 .service-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-4px);
 
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.07);
 }
+
+
+/* Service title */
 
 .service-card h3 {
-    font-size: 19px;
+    margin: 0 0 10px;
+
+    font-size: 18px !important;
+    line-height: 1.3 !important;
+
+    font-weight: 600;
 
     color: #111827;
-
-    margin-bottom: 12px;
 }
 
-.service-card p {
-    font-size: 14px;
 
-    line-height: 1.6;
+/* Service description */
+
+.service-card p {
+    margin: 0;
+
+    font-size: 14px !important;
+    line-height: 1.6 !important;
 
     color: #6b7280;
 }
 
 
-/* =========================================
+/* =========================================================
    LOGIN / REGISTER SECTION
-========================================= */
+========================================================= */
 
 .auth-section {
-    min-height: 650px;
+    width: 100%;
+    min-height: calc(100vh - 64px);
 
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
-    padding: 80px 20px;
+    padding: 60px 20px;
 
     background: #eef1f7;
 }
 
 
-/* =========================================
+/* =========================================================
    LOGIN CARD
-========================================= */
+========================================================= */
 
 .auth-container {
     width: 100%;
 
-    max-width: 430px;
+    max-width: 400px;
 
     background: #ffffff;
 
-    padding: 40px;
+    padding: 32px;
 
-    border-radius: 16px;
+    border-radius: 14px;
 
     border: 1px solid #e5e7eb;
 
     box-shadow:
-        0 10px 30px rgba(0, 0, 0, 0.08),
+        0 10px 30px rgba(0, 0, 0, 0.07),
         0 2px 8px rgba(0, 0, 0, 0.03);
 
     text-align: left;
 }
 
 
-/* =========================================
+/* =========================================================
    LOGIN TITLE
-========================================= */
+========================================================= */
 
 .auth-container h2 {
+    margin: 0 0 7px;
+
     text-align: center;
 
-    font-size: 28px;
+    font-size: 26px !important;
+    line-height: 1.2 !important;
 
     font-weight: 700;
 
     color: #111827;
-
-    margin-bottom: 8px;
 }
+
+
+/* Subtitle */
 
 .auth-subtitle {
+    margin: 0 0 25px;
+
     text-align: center;
 
-    font-size: 14px;
+    font-size: 14px !important;
+    line-height: 1.5 !important;
 
     color: #6b7280;
-
-    margin-bottom: 30px;
 }
 
 
-/* =========================================
+/* =========================================================
    INPUT GROUP
-========================================= */
+========================================================= */
 
 .input-group {
-    margin-bottom: 20px;
+    margin-bottom: 17px;
 }
+
+
+/* Labels */
 
 .input-group label {
     display: block;
 
-    font-size: 14px;
+    margin: 0 0 7px;
+
+    font-size: 13px !important;
+    line-height: 1.3 !important;
 
     font-weight: 600;
 
     color: #374151;
-
-    margin-bottom: 7px;
 }
+
+
+/* Inputs */
 
 .input-group input {
     width: 100%;
+    height: 44px;
 
-    height: 46px;
-
-    padding: 0 14px;
+    padding: 0 13px;
 
     border: 1px solid #d1d5db;
 
-    border-radius: 8px;
+    border-radius: 7px;
 
     outline: none;
 
@@ -286,9 +380,15 @@ body {
 
     color: #111827;
 
-    font-size: 14px;
+    font-family: inherit;
 
-    transition: 0.2s ease;
+    font-size: 14px !important;
+
+    line-height: 1 !important;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 .input-group input::placeholder {
@@ -298,40 +398,52 @@ body {
 .input-group input:focus {
     border-color: #635bff;
 
-    box-shadow: 0 0 0 3px rgba(99, 91, 255, 0.12);
+    box-shadow:
+        0 0 0 3px rgba(99, 91, 255, 0.12);
 }
 
 
-/* =========================================
+/* =========================================================
    LOGIN / REGISTER BUTTON
-========================================= */
+========================================================= */
 
 .auth-button {
     width: 100%;
+    height: 44px;
 
-    height: 46px;
+    margin: 3px 0 0;
+
+    padding: 0;
 
     border: none;
 
-    border-radius: 8px;
+    border-radius: 7px;
 
     background: #635bff;
 
     color: #ffffff;
 
-    font-size: 15px;
+    font-family: inherit;
+
+    font-size: 14px !important;
+
+    line-height: 1 !important;
 
     font-weight: 600;
 
     cursor: pointer;
 
-    transition: 0.2s ease;
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 .auth-button:hover {
     background: #5148e5;
 
-    box-shadow: 0 5px 15px rgba(99, 91, 255, 0.25);
+    box-shadow:
+        0 5px 15px rgba(99, 91, 255, 0.2);
 
     transform: translateY(-1px);
 }
@@ -341,18 +453,18 @@ body {
 }
 
 
-/* =========================================
+/* =========================================================
    SWITCH LOGIN / REGISTER
-========================================= */
+========================================================= */
 
 .switch-button {
     display: block;
 
     width: 100%;
 
-    margin-top: 20px;
+    margin: 17px 0 0;
 
-    padding: 10px;
+    padding: 8px;
 
     border: none;
 
@@ -360,13 +472,17 @@ body {
 
     color: #635bff;
 
-    font-size: 14px;
+    font-family: inherit;
+
+    font-size: 13px !important;
+
+    line-height: 1.4 !important;
 
     font-weight: 500;
 
     cursor: pointer;
 
-    transition: 0.2s ease;
+    transition: color 0.2s ease;
 }
 
 .switch-button:hover {
@@ -376,12 +492,14 @@ body {
 }
 
 
-/* =========================================
-   CONTACT
-========================================= */
+/* =========================================================
+   CONTACT SECTION
+========================================================= */
 
 .contact-section {
-    padding: 70px 20px;
+    width: 100%;
+
+    padding: 65px 20px;
 
     text-align: center;
 
@@ -389,32 +507,34 @@ body {
 }
 
 .contact-section h2 {
-    font-size: 32px;
+    margin: 0 0 15px;
+
+    font-size: 28px !important;
+    line-height: 1.2 !important;
 
     font-weight: 700;
 
     color: #111827;
-
-    margin-bottom: 20px;
 }
 
 .contact-section p {
-    font-size: 16px;
+    margin: 0 0 5px;
 
-    line-height: 1.8;
+    font-size: 15px !important;
+    line-height: 1.7 !important;
 
     color: #6b7280;
-
-    margin-bottom: 5px;
 }
 
 
-/* =========================================
+/* =========================================================
    FOOTER
-========================================= */
+========================================================= */
 
 .footer {
-    padding: 25px 20px;
+    width: 100%;
+
+    padding: 22px 20px;
 
     text-align: center;
 
@@ -424,20 +544,21 @@ body {
 }
 
 .footer p {
-    font-size: 13px;
+    margin: 0;
 
-    line-height: 1.5;
+    font-size: 13px !important;
+    line-height: 1.5 !important;
 }
 
 
-/* =========================================
+/* =========================================================
    TABLET
-========================================= */
+========================================================= */
 
 @media (max-width: 900px) {
 
     .home-content h1 {
-        font-size: 40px;
+        font-size: 36px !important;
     }
 
     .services-container {
@@ -446,66 +567,82 @@ body {
 }
 
 
-/* =========================================
+/* =========================================================
    MOBILE
-========================================= */
+========================================================= */
 
 @media (max-width: 700px) {
 
     .home-section {
         min-height: 450px;
 
-        padding: 60px 20px;
+        padding: 50px 20px;
     }
 
     .home-content h1 {
-        font-size: 32px;
+        font-size: 30px !important;
     }
 
     .home-content p {
-        font-size: 16px;
+        font-size: 15px !important;
     }
+
 
     .about-section,
     .services-section,
     .contact-section {
-        padding: 60px 20px;
+        padding: 55px 20px;
     }
+
 
     .about-section h2,
     .services-section h2,
     .contact-section h2 {
-        font-size: 27px;
+        font-size: 25px !important;
     }
+
 
     .services-container {
         grid-template-columns: 1fr;
+
+        max-width: 450px;
     }
+
 
     .auth-section {
-        padding: 50px 15px;
+        min-height: 500px;
+
+        padding: 45px 15px;
     }
 
+
     .auth-container {
-        padding: 30px 22px;
+        max-width: 400px;
+
+        padding: 28px 22px;
 
         border-radius: 12px;
     }
 
+
     .auth-container h2 {
-        font-size: 25px;
+        font-size: 24px !important;
     }
 }
 
 
-/* =========================================
+/* =========================================================
    SMALL MOBILE
-========================================= */
+========================================================= */
 
 @media (max-width: 400px) {
 
     .home-content h1 {
-        font-size: 28px;
+        font-size: 27px !important;
+    }
+
+    .home-content p {
+        font-size: 14px !important;
     }
 
     .auth-container {
@@ -513,6 +650,14 @@ body {
     }
 
     .auth-container h2 {
-        font-size: 23px;
+        font-size: 22px !important;
+    }
+
+    .input-group input {
+        height: 43px;
+    }
+
+    .auth-button {
+        height: 43px;
     }
 }

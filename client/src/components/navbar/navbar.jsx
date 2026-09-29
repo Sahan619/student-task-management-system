@@ -3,38 +3,73 @@ import "./navbar.css";
 import logo from "../../assets/logo.png";
 
 function Navbar() {
+
+    const handleLogin = () => {
+        const loginSection = document.getElementById("login");
+
+        if (loginSection) {
+            loginSection.scrollIntoView({
+                behavior: "smooth"
+            });
+        }
+    };
+
     return (
-        <nav className="navbar">
+        <nav className="stm-navbar">
 
-            {/* Logo */}
-            <div className="navbar-logo">
-                <img src={logo} alt="Logo" />
-                <span>Student Task Manager</span>
+            {/* Brand */}
+            <div className="stm-brand">
+
+                <div className="stm-logo-wrapper">
+                    <img
+                        src={logo}
+                        alt="Student Task Manager"
+                        onError={(e) => {
+                            e.currentTarget.style.display = "none";
+                            e.currentTarget.nextElementSibling.style.display = "flex";
+                        }}
+                    />
+
+                    {/* Fallback if logo doesn't load */}
+                    <div className="stm-logo-fallback">
+                        STM
+                    </div>
+                </div>
+
+                <span className="stm-brand-name">
+                    Student Task Manager
+                </span>
+
             </div>
 
-            {/* Navigation Links */}
-            <div className="navbar-links">
 
-                <a href="#home">Home</a>
+            {/* Navigation */}
+            <div className="stm-nav-links">
 
-                <a href="#about">About Us</a>
+                <a href="#home" className="active">
+                    Home
+                </a>
 
-                <a href="#services">Services</a>
+                <a href="#about">
+                    About Us
+                </a>
 
-                <a href="#contact">Contact Us</a>
+                <a href="#services">
+                    Services
+                </a>
+
+                <a href="#contact">
+                    Contact Us
+                </a>
 
             </div>
 
-            {/* Login Button */}
+
+            {/* Login */}
             <button
-                className="navbar-login"
-                onClick={() => {
-                    document
-                        .getElementById("login")
-                        ?.scrollIntoView({
-                            behavior: "smooth"
-                        });
-                }}
+                type="button"
+                className="stm-login-btn"
+                onClick={handleLogin}
             >
                 Login
             </button>

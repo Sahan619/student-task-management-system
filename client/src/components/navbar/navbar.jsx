@@ -38,7 +38,11 @@ function Navbar() {
 
                 <span className="stm-brand-name">
                     Student Task Manager
+                    <p className="discription">Keep on track and explore your path</p>
                 </span>
+
+
+                
 
             </div>
 

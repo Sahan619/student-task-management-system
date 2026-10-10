@@ -1,362 +1,154 @@
-/* =========================================
-   NAVBAR
-========================================= */
-
-.stm-navbar {
+.navbar {
     width: 100%;
-    height: 72px;
+    height: 86px;
 
     display: flex;
     align-items: center;
+    justify-content: space-between;
 
-    padding: 0 40px;
+    padding: 0 55px;
 
-    background: #f8f6ef;
+    background: #F7F3EA;
 
-    border-bottom: 1px solid #dfe5df;
+    border-bottom: 1px solid #D9DED6;
 
-    box-shadow: 0 2px 10px rgba(23, 61, 53, 0.08);
+    box-shadow: 0 3px 12px rgba(20, 60, 50, 0.06);
 
-    box-sizing: border-box;
-
-    position: relative;
+    position: sticky;
+    top: 0;
     z-index: 1000;
 }
 
 
-/* =========================================
-   BRAND AREA
-========================================= */
+/* BRAND */
 
-.stm-brand {
+.navbar-brand {
     display: flex;
     align-items: center;
+    gap: 16px;
 
-    gap: 14px;
-
-    flex-shrink: 0;
+    cursor: pointer;
 }
 
+.brand-short {
+    color: #91A5B5;
+    font-size: 22px;
+    font-weight: 500;
+}
 
-/* STM LOGO */
+.navbar-brand h2 {
+    margin: 0;
 
-.stm-logo {
-    width: 42px !important;
-    height: 42px !important;
+    color: #0E3F37;
 
-    max-width: 42px !important;
-    max-height: 42px !important;
+    font-size: 24px;
+    font-weight: 700;
+}
 
-    object-fit: contain;
-
+.navbar-brand span {
     display: block;
+
+    color: #6D8490;
+
+    font-size: 13px;
+    margin-top: 1px;
 }
 
 
-/* =========================================
-   BRAND TEXT
-========================================= */
+/* NAV LINKS */
 
-.stm-brand-text {
+.navbar-links {
     display: flex;
-
-    flex-direction: column;
-
-    justify-content: center;
-
-    gap: 3px;
-}
-
-
-/* MAIN TITLE */
-
-.stm-brand-name {
-    font-family: "Segoe UI", Arial, sans-serif !important;
-
-    font-size: 21px !important;
-
-    font-weight: 700 !important;
-
-    line-height: 1.1 !important;
-
-    color: #173d35 !important;
-
-    margin: 0 !important;
-
-    padding: 0 !important;
-
-    white-space: nowrap;
-}
-
-
-/* DESCRIPTION */
-
-.discription {
-    margin: 0 !important;
-
-    padding: 0 !important;
-
-    font-family: "Segoe UI", Arial, sans-serif;
-
-    font-size: 11px;
-
-    font-weight: 400;
-
-    line-height: 1.2;
-
-    color: #7b8983;
-
-    white-space: nowrap;
-}
-
-
-/* =========================================
-   NAVIGATION LINKS
-========================================= */
-
-.stm-nav-links {
-    display: flex;
-
     align-items: center;
-
-    gap: 30px;
-
-    margin-left: auto;
-
-    margin-right: 28px;
+    gap: 28px;
 }
 
+.navbar-links button {
+    border: none;
+    background: transparent;
 
-.stm-nav-links a {
-    font-family: "Segoe UI", Arial, sans-serif !important;
+    color: #073C35;
 
-    font-size: 14px !important;
-
-    font-weight: 500 !important;
-
-    line-height: 1 !important;
-
-    color: #173d35 !important;
-
-    text-decoration: none !important;
-
-    margin: 0 !important;
-
-    padding: 8px 0 !important;
-
-    white-space: nowrap;
-
-    position: relative;
-
-    transition:
-        color 0.2s ease,
-        transform 0.2s ease;
-}
-
-
-/* HOVER */
-
-.stm-nav-links a:hover {
-    color: #51776a !important;
-
-    transform: translateY(-1px);
-}
-
-
-/* ACTIVE LINK */
-
-.stm-nav-links a.active {
-    color: #b59a45 !important;
-}
-
-
-/* ACTIVE UNDERLINE */
-
-.stm-nav-links a.active::after {
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-    right: 0;
-
-    bottom: 0;
-
-    height: 2px;
-
-    border-radius: 2px;
-
-    background: #b59a45;
-}
-
-
-/* =========================================
-   LOGIN BUTTON
-========================================= */
-
-/* =========================================
-   LOGIN BUTTON
-========================================= */
-
-.stm-login-btn {
-    width: 68px !important;
-    height: 32px !important;
-
-    padding: 0 !important;
-    margin: 0 !important;
-
-    border: 1px solid #b59a45 !important;
-    border-radius: 6px;
-
-    background: transparent !important;
-
-    color: #173d35 !important;
-
-    font-family: "Segoe UI", Arial, sans-serif !important;
-    font-size: 13px !important;
-    font-weight: 600 !important;
+    font-size: 16px;
+    font-weight: 600;
 
     cursor: pointer;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    padding: 9px 4px;
 
-    transition: all 0.25s ease;
+    transition: 0.25s ease;
 }
 
-
-/* HOVER */
-
-.stm-login-btn:hover {
-    background: #b59a45 !important;
-
-    color: #ffffff !important;
-
-    border-color: #b59a45 !important;
+.navbar-links button:hover {
+    color: #B99435;
 
     transform: translateY(-1px);
-
-    box-shadow: 0 4px 10px rgba(181, 154, 69, 0.20);
 }
 
 
-/* CLICK */
+/* LOGIN */
 
-.stm-login-btn:active {
-    transform: translateY(0);
+.navbar-links .nav-login {
+    padding: 9px 22px;
 
-    box-shadow: none;
+    border: 1px solid #B99435;
+    border-radius: 9px;
+
+    color: #073C35;
 }
 
-/* =========================================
-   MOBILE
-========================================= */
-
-@media (max-width: 700px) {
-
-    .stm-navbar {
-        height: auto;
-
-        min-height: 65px;
-
-        padding: 10px 15px;
-
-        flex-wrap: wrap;
-
-        gap: 10px;
-    }
-
-
-    .stm-logo {
-        width: 34px !important;
-        height: 34px !important;
-    }
-
-
-    .stm-brand {
-        gap: 9px;
-    }
-
-
-    .stm-brand-name {
-        font-size: 16px !important;
-    }
-
-
-    .discription {
-        font-size: 9px;
-    }
-
-
-    .stm-nav-links {
-        width: 100%;
-
-        justify-content: center;
-
-        order: 3;
-
-        gap: 18px;
-
-        margin: 5px 0 2px;
-    }
-
-
-    .stm-nav-links a {
-        font-size: 12px !important;
-
-        padding: 5px 0 !important;
-    }
-
-
-    .stm-login {
-        width: 62px !important;
-
-        height: 30px !important;
-
-        font-size: 12px !important;
-
-        margin-left: auto !important;
-    }
+.navbar-links .nav-login:hover {
+    background: #B99435;
+    color: white;
 }
 
 
-/* =========================================
-   VERY SMALL MOBILE
-========================================= */
+/* DASHBOARD */
 
-@media (max-width: 430px) {
+.nav-dashboard:hover {
+    color: #4F7D70 !important;
+}
 
-    .stm-navbar {
-        padding: 9px 12px;
+
+/* TASKS */
+
+.nav-task:hover {
+    color: #4F7D70 !important;
+}
+
+
+/* LOGOUT */
+
+.nav-logout {
+    color: #9B4C4C !important;
+}
+
+.nav-logout:hover {
+    color: #C53F3F !important;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+
+    .navbar {
+        padding: 0 25px;
     }
 
-
-    .stm-brand-name {
-        font-size: 15px !important;
+    .navbar-brand h2 {
+        font-size: 19px;
     }
 
-
-    .discription {
-        display: none;
+    .navbar-brand span {
+        font-size: 11px;
     }
 
-
-    .stm-nav-links {
-        gap: 13px;
+    .navbar-links {
+        gap: 14px;
     }
 
-
-    .stm-nav-links a {
-        font-size: 11px !important;
-    }
-
-
-    .stm-login {
-        width: 58px !important;
-
-        height: 29px !important;
-
-        font-size: 11px !important;
+    .navbar-links button {
+        font-size: 14px;
     }
 }

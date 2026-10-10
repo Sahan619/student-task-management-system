@@ -1,0 +1,182 @@
+.home-page {
+    min-height: calc(100vh - 86px);
+
+    padding: 85px 6%;
+
+    text-align: center;
+
+    background: #F7F3EA;
+}
+
+
+/* BADGE */
+
+.home-badge {
+    display: inline-block;
+
+    padding: 11px 20px;
+
+    border-radius: 30px;
+
+    background: #DDE8DC;
+
+    color: #4F7D70;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+
+/* TITLE */
+
+.home-page h1 {
+    margin: 35px auto 20px;
+
+    color: #0B4038;
+
+    font-size: clamp(42px, 5vw, 68px);
+
+    line-height: 1.1;
+
+    max-width: 1100px;
+}
+
+.home-page h1 span {
+    color: #588274;
+}
+
+
+/* DESCRIPTION */
+
+.home-description {
+    max-width: 800px;
+
+    margin: auto;
+
+    color: #68808C;
+
+    font-size: 19px;
+
+    line-height: 1.7;
+}
+
+
+/* FEATURES */
+
+.home-features {
+    max-width: 1050px;
+
+    margin: 50px auto 40px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 25px;
+}
+
+.home-feature {
+    padding: 30px;
+
+    min-height: 210px;
+
+    background: #FFFCF7;
+
+    border: 1px solid #DCE3DC;
+
+    border-radius: 20px;
+
+    transition: 0.3s ease;
+}
+
+.home-feature:hover {
+    transform: translateY(-7px);
+
+    border-color: #6E978A;
+
+    box-shadow:
+        0 15px 30px rgba(20, 60, 50, 0.10);
+}
+
+
+/* ICON */
+
+.feature-icon {
+    width: 55px;
+    height: 55px;
+
+    margin: 0 auto 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 15px;
+
+    background: #DDE9DE;
+
+    color: #4F8175;
+
+    font-size: 28px;
+}
+
+.home-feature h2 {
+    color: #073C35;
+
+    font-size: 20px;
+
+    margin-bottom: 10px;
+}
+
+.home-feature p {
+    color: #718693;
+
+    line-height: 1.5;
+}
+
+
+/* BUTTON */
+
+.home-button {
+    padding: 14px 30px;
+
+    border: none;
+    border-radius: 30px;
+
+    background: #4F7D70;
+
+    color: white;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+
+    box-shadow:
+        0 8px 20px rgba(79, 125, 112, 0.20);
+}
+
+.home-button:hover {
+    background: #37695D;
+
+    transform: translateY(-2px);
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 800px) {
+
+    .home-features {
+        grid-template-columns: 1fr;
+    }
+
+    .home-page {
+        padding: 55px 25px;
+    }
+}

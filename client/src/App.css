@@ -1,1636 +1,332 @@
-/* =========================================================
-   GLOBAL
-========================================================= */
-
-/* ================================
-   GLOBAL RESET
-================================ */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html,
-body,
-#root {
-    width: 100%;
-    min-width: 100%;
-    min-height: 100%;
-    margin: 0;
-    padding: 0;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    font-family: "Segoe UI", Arial, sans-serif;
-    background: #F7F3EA;
-    overflow-x: hidden;
-}
-
-
-/* ================================
-   MAIN APP
-================================ */
-
 .app {
     width: 100%;
-    min-width: 100%;
     min-height: 100vh;
+
     margin: 0;
     padding: 0;
 }
 
-/* =========================================================
-   HOME SECTION
-========================================================= */
 
-/* =========================================
-   HOME SECTION
-========================================= */
+/* AUTH */
 
-.home-section {
-    width: 100%;
-    min-height: calc(100vh - 64px);
+.auth-page {
+    min-height: calc(100vh - 86px);
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
-    padding: 70px 30px;
-
-    background:
-        radial-gradient(
-            circle at 15% 20%,
-            rgba(176, 195, 177, 0.35),
-            transparent 30%
-        ),
-        radial-gradient(
-            circle at 85% 80%,
-            rgba(181, 154, 69, 0.10),
-            transparent 28%
-        ),
-        #F7F3EA;
-
-    position: relative;
-    overflow: hidden;
-}
-
-
-/* =========================================
-   HOME CONTENT
-========================================= */
-
-.home-content {
-    width: 100%;
-    max-width: 1050px;
-
-    text-align: center;
-
-    position: relative;
-    z-index: 2;
-}
-
-
-/* =========================================
-   SMALL BADGE
-========================================= */
-
-.hero-badge {
-    display: inline-block;
-
-    padding: 8px 16px;
-
-    margin-bottom: 18px;
-
-    border-radius: 30px;
-
-    background: #DDE6DA;
-
-    color: #51776A;
-
-    font-size: 12px;
-    font-weight: 700;
-
-    letter-spacing: 1.2px;
-}
-
-
-/* =========================================
-   MAIN TITLE
-========================================= */
-
-.home-content h1 {
-    margin: 0;
-
-    font-size: clamp(38px, 5vw, 58px);
-
-    line-height: 1.1;
-
-    font-weight: 700;
-
-    color: #173D35;
-}
-
-.home-content h1 span {
-    color: #51776A;
-}
-
-
-/* =========================================
-   DESCRIPTION
-========================================= */
-
-.hero-description {
-    max-width: 650px;
-
-    margin: 20px auto 35px;
-
-    font-size: 17px;
-
-    line-height: 1.7;
-
-    color: #718087;
-}
-
-
-/* =========================================
-   FEATURE CARDS
-========================================= */
-
-.hero-cards {
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, minmax(0, 1fr));
-
-    gap: 20px;
-
-    max-width: 850px;
-
-    margin: 0 auto 32px;
-}
-
-
-.hero-card {
-    padding: 24px 20px;
-
-    background: rgba(250, 247, 242, 0.9);
-
-    border: 1px solid #DDE6DA;
-
-    border-radius: 18px;
-
-    box-shadow:
-        0 8px 25px rgba(23, 61, 53, 0.07);
-
-    transition: all 0.25s ease;
-}
-
-
-.hero-card:hover {
-    transform: translateY(-5px);
-
-    box-shadow:
-        0 14px 30px rgba(23, 61, 53, 0.12);
-
-    border-color: #B0C3B1;
-}
-
-
-/* =========================================
-   CARD ICON
-========================================= */
-
-.card-icon {
-    width: 48px;
-    height: 48px;
-
-    margin: 0 auto 14px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 14px;
-
-    background: #DDE6DA;
-
-    color: #51776A;
-
-    font-size: 24px;
-
-    font-weight: 700;
-}
-
-
-.hero-card h3 {
-    margin-bottom: 8px;
-
-    font-size: 17px;
-
-    color: #173D35;
-}
-
-
-.hero-card p {
-    margin: 0;
-
-    font-size: 13px;
-
-    line-height: 1.5;
-
-    color: #718087;
-}
-
-
-/* =========================================
-   GET STARTED BUTTON
-========================================= */
-
-.hero-button {
-    border: none;
-
-    padding: 13px 28px;
-
-    border-radius: 30px;
-
-    background: #51776A;
-
-    color: #FFFFFF;
-
-    font-size: 15px;
-
-    font-weight: 600;
-
-    cursor: pointer;
-
-    box-shadow:
-        0 7px 18px rgba(81, 119, 106, 0.25);
-
-    transition: all 0.25s ease;
-}
-
-
-.hero-button:hover {
-    background: #3F6257;
-
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 10px 22px rgba(81, 119, 106, 0.3);
-}
-
-/* =========================================================
-   ABOUT SECTION
-========================================================= */
-
-/* =========================================
-   ABOUT SECTION
-========================================= */
-
-/* ========================================
-   ABOUT SECTION
-======================================== */
-
-.about-section {
-    width: 100%;
-    min-height: 620px;
-
-    padding: 70px 40px;
+    padding: 50px 20px;
 
     background: #F7F3EA;
+}
+
+
+.auth-card {
+    width: 100%;
+    max-width: 480px;
+
+    padding: 40px;
+
+    background: #FFFCF7;
+
+    border: 1px solid #D7E0D8;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 15px 40px rgba(20, 60, 50, 0.08);
+}
+
+
+.auth-icon {
+    width: 60px;
+    height: 60px;
+
+    margin: 0 auto 22px;
 
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
 
-    text-align: center;
+    border-radius: 16px;
 
-    box-sizing: border-box;
+    background: #DDE9DE;
+
+    color: #4F7D70;
+
+    font-size: 32px;
 }
 
 
-/* ========================================
-   ABOUT HEADER
-======================================== */
+.auth-card h1 {
+    margin: 0;
 
-.about-header {
+    text-align: center;
+
+    color: #073C35;
+
+    font-size: 34px;
+}
+
+
+.auth-card > p {
+    text-align: center;
+
+    color: #708590;
+
+    margin: 10px 0 30px;
+}
+
+
+.auth-card form {
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+.auth-card label {
+    margin: 15px 0 7px;
+
+    color: #073C35;
+
+    font-weight: 600;
+}
+
+
+.auth-card input {
     width: 100%;
-    max-width: 1000px;
 
-    margin: 0 auto 55px;
+    padding: 14px 16px;
 
-    text-align: center;
+    border: 1px solid #B9CBC3;
+
+    border-radius: 10px;
+
+    background: white;
+
+    color: #073C35;
+
+    font-size: 16px;
+
+    outline: none;
 }
 
 
-.about-label {
-    margin: 0 0 18px;
+.auth-card input:focus {
+    border-color: #4F7D70;
+
+    box-shadow:
+        0 0 0 3px rgba(79, 125, 112, 0.10);
+}
+
+
+.primary-button {
+    margin-top: 25px;
+
+    padding: 14px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #174A40;
+
+    color: white;
 
     font-size: 16px;
     font-weight: 700;
 
-    letter-spacing: 2px;
+    cursor: pointer;
 
-    color: #B59A45;
-
-    text-transform: uppercase;
+    transition: 0.25s ease;
 }
 
 
-.about-header h2 {
-    margin: 0 0 20px;
+.primary-button:hover {
+    background: #37695D;
 
-    font-size: 42px;
+    transform: translateY(-1px);
+}
+
+
+.primary-button:disabled {
+    opacity: 0.6;
+
+    cursor: not-allowed;
+}
+
+
+/* ERROR */
+
+.error-message {
+    padding: 13px 15px;
+
+    margin-bottom: 20px;
+
+    border: 1px solid #F2BABA;
+
+    border-radius: 10px;
+
+    background: #FFF0F0;
+
+    color: #D13C3C;
+
+    font-size: 14px;
+}
+
+
+/* REGISTER LINK */
+
+.auth-link {
+    margin-top: 25px !important;
+}
+
+.auth-link button {
+    border: none;
+
+    background: transparent;
+
+    color: #4F7D70;
+
     font-weight: 700;
-
-    line-height: 1.2;
-
-    color: #173D35;
-}
-
-
-.about-description {
-    max-width: 950px;
-
-    margin: 0 auto;
-
-    font-size: 18px;
-    line-height: 1.7;
-
-    color: #70827C;
-}
-
-
-/* ========================================
-   FEATURE CARDS
-======================================== */
-
-.about-features {
-    width: 100%;
-    max-width: 1100px;
-    margin: 0 auto;
-
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 24px;
-
-    align-items: stretch;
-}
-
-
-/* ========================================
-   INDIVIDUAL CARD
-======================================== */
-
-.about-card {
-    min-height: 230px;
-
-    padding: 32px 28px;
-
-    background: #FFFDF8;
-
-    border: 1px solid #DCE5DE;
-
-    border-radius: 18px;
-
-    display: flex;
-    flex-direction: column;
-
-    align-items: center;
-    justify-content: center;
-
-    text-align: center;
-
-    box-shadow: 0 8px 20px rgba(23, 61, 53, 0.06);
-
-    transition:
-        transform 0.3s ease,
-        box-shadow 0.3s ease,
-        border-color 0.3s ease,
-        background 0.3s ease;
 
     cursor: pointer;
 }
 
-
-/* ========================================
-   CARD HOVER
-======================================== */
-
-.about-card:hover {
-    transform: translateY(-8px);
-
-    background: #F1F6F0;
-
-    border-color: #B8CFC4;
-
-    box-shadow: 0 16px 30px rgba(23, 61, 53, 0.12);
+.auth-link button:hover {
+    color: #B99435;
 }
 
 
-/* ========================================
-   ICON
-======================================== */
+/* SIMPLE PAGES */
 
-.about-icon {
-    width: 58px;
-    height: 58px;
+.simple-page {
+    min-height: calc(100vh - 86px);
 
-    margin-bottom: 20px;
-
-    border-radius: 16px;
-
-    background: #DCE8DD;
-
-    color: #286354;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 26px;
-
-    transition:
-        transform 0.3s ease,
-        background 0.3s ease,
-        color 0.3s ease;
-}
-
-
-/* Icon hover */
-
-.about-card:hover .about-icon {
-    transform: scale(1.08);
-
-    background: #286354;
-
-    color: #FFFDF8;
-}
-
-
-/* ========================================
-   CARD TITLE
-======================================== */
-
-.about-card h3 {
-    margin: 0 0 12px;
-
-    font-size: 20px;
-
-    font-weight: 700;
-
-    color: #173D35;
-
-    transition: color 0.3s ease;
-}
-
-
-.about-card:hover h3 {
-    color: #286354;
-}
-
-
-/* ========================================
-   CARD DESCRIPTION
-======================================== */
-
-.about-card p {
-    max-width: 280px;
-
-    margin: 0;
-
-    font-size: 15px;
-
-    line-height: 1.6;
-
-    color: #71847D;
-}
-
-
-
-/* ========================================
-   MOBILE
-======================================== */
-
-@media (max-width: 600px) {
-
-    .about-section {
-        padding: 50px 15px;
-    }
-
-    .about-header h2 {
-        font-size: 28px;
-    }
-
-    .about-description {
-        font-size: 15px;
-    }
-
-    .about-card {
-        padding: 25px 15px;
-        min-height: 200px;
-    }
-
-    .about-card h3 {
-        font-size: 17px;
-    }
-
-    .about-card p {
-        font-size: 14px;
-    }
-}
-/* =========================================
-   SERVICES SECTION
-========================================= */
-.section-header h2 {
-    color: #173D35;
-    font-size: 38px;
-    font-weight: 700;
-    text-align: center;
-}
-
-.section-header span {
-   color: #B59A45;
-    font-size:18px;
-    text-align: center;
-    letter-spacing: 2px;
-}
-.services-section {
-    width: 100%;
-
-    padding: 90px 30px;
-
-    background: #F3F6EF;
+    padding: 75px 6%;
 
     text-align: center;
+
+    background: #F7F3EA;
 }
 
 
-/* =========================================
-   SERVICES CONTAINER
-========================================= */
+.simple-page h1 {
+    margin: 20px auto;
 
-.services-container {
-    width: 100%;
+    color: #073C35;
 
+    font-size: 46px;
+}
+
+
+.simple-page > p {
+    max-width: 950px;
+
+    margin: auto;
+
+    color: #708590;
+
+    font-size: 18px;
+
+    line-height: 1.8;
+}
+
+
+/* INFO */
+
+.info-grid {
     max-width: 1050px;
 
-    margin: 0 auto;
+    margin: 55px auto 0;
 
     display: grid;
 
     grid-template-columns:
         repeat(3, 1fr);
 
-    gap: 24px;
+    gap: 25px;
 }
 
 
-/* =========================================
-   SERVICE CARD
-========================================= */
+.info-card,
+.contact-card {
+    padding: 30px;
 
-.service-card {
-    position: relative;
+    background: #FFFCF7;
 
-    padding: 32px 28px;
+    border: 1px solid #D8E1D9;
 
-    background: #FAF7F2;
+    border-radius: 18px;
 
-    border: 1px solid #DDE6DA;
-
-    border-radius: 20px;
-
-    text-align: left;
-
-    box-shadow:
-        0 8px 25px rgba(23, 61, 53, 0.06);
-
-    transition: all 0.25s ease;
+    transition: 0.3s ease;
 }
 
 
-.service-card:hover {
+.info-card:hover,
+.contact-card:hover {
     transform: translateY(-6px);
 
-    border-color: #B0C3B1;
+    border-color: #6F978A;
 
     box-shadow:
-        0 15px 35px rgba(23, 61, 53, 0.11);
+        0 15px 30px rgba(20, 60, 50, 0.09);
 }
 
 
-/* =========================================
-   SERVICE ICON
-========================================= */
+.info-icon {
+    font-size: 30px;
 
-.service-icon {
-    width: 50px;
-    height: 50px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    margin-bottom: 20px;
-
-    border-radius: 15px;
-
-    background: #DDE6DA;
-
-    color: #51776A;
-
-    font-size: 23px;
-
-    font-weight: 700;
+    margin-bottom: 15px;
 }
 
 
-.service-card h3 {
-    margin: 0 0 10px;
+.info-card h2,
+.contact-card h2 {
+    color: #073C35;
 
-    color: #173D35;
+    font-size: 21px;
 
-    font-size: 19px;
-
-    font-weight: 700;
+    margin-bottom: 10px;
 }
 
 
-.service-card p {
-    margin: 0 0 20px;
-
-    color: #718087;
-
-    font-size: 14px;
-
-    line-height: 1.65;
-}
-
-
-/* =========================================
-   SERVICE LINK
-========================================= */
-
-.service-link {
-    color: #51776A;
-
-    font-size: 13px;
-
-    font-weight: 700;
-
-    transition: 0.2s ease;
-}
-
-
-.service-card:hover .service-link {
-    color: #B59A45;
-}
-
-
-
-/* =========================================================
-   LOGIN / REGISTER SECTION
-========================================================= */
-
-.auth-section {
-    width: 100%;
-    min-height: calc(100vh - 64px);
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    padding: 60px 20px;
-
-    background: #eef1f7;
-}
-
-
-/* =========================================================
-   LOGIN CARD
-========================================================= */
-
-.auth-container {
-    width: 100%;
-
-    max-width: 400px;
-
-    background: #ffffff;
-
-    padding: 32px;
-
-    border-radius: 14px;
-
-    border: 1px solid #e5e7eb;
-
-    box-shadow:
-        0 10px 30px rgba(0, 0, 0, 0.07),
-        0 2px 8px rgba(0, 0, 0, 0.03);
-
-    text-align: left;
-}
-
-
-/* =========================================================
-   LOGIN TITLE
-========================================================= */
-
-.auth-container h2 {
-    margin: 0 0 7px;
-
-    text-align: center;
-
-    font-size: 26px !important;
-    line-height: 1.2 !important;
-
-    font-weight: 700;
-
-    color: #013604;
-}
-
-
-/* Subtitle */
-
-.auth-subtitle {
-    margin: 0 0 25px;
-
-    text-align: center;
-
-    font-size: 14px !important;
-    line-height: 1.5 !important;
-
-    color: #6b7280;
-}
-
-/* =========================================
-   LOGIN MESSAGE
-========================================= */
-
-.login-message {
-    width: 100%;
-
-    display: flex;
-    align-items: center;
-    gap: 8px;
-
-    margin-bottom: 18px;
-
-    padding: 10px 12px;
-
-    border-radius: 7px;
-
-    font-size: 13px;
-
-    line-height: 1.4;
-
-    text-align: left;
-}
-
-
-/* Success */
-
-.login-message.success {
-    background: #ecfdf5;
-
-    border: 1px solid #a7f3d0;
-
-    color: #047857;
-}
-
-
-/* Error */
-
-.login-message.error {
-    background: #fef2f2;
-
-    border: 1px solid #fecaca;
-
-    color: #dc2626;
-}
-
-
-/* Message icon */
-
-.message-icon {
-    width: 20px;
-    height: 20px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    flex-shrink: 0;
-
-    border-radius: 50%;
-
-    font-size: 12px;
-    font-weight: 700;
-}
-
-/* =========================================================
-   INPUT GROUP
-========================================================= */
-
-.input-group {
-    margin-bottom: 17px;
-}
-
-
-/* Labels */
-
-.input-group label {
-    display: block;
-
-    margin: 0 0 7px;
-
-    font-size: 13px !important;
-    line-height: 1.3 !important;
-
-    font-weight: 600;
-
-    color: #000000;
-}
-
-
-/* Inputs */
-
-.input-group input {
-    width: 100%;
-    height: 44px;
-
-    padding: 0 13px;
-
-    border: 1px solid #d1d5db;
-
-    border-radius: 7px;
-
-    outline: none;
-
-    background: #FAF7F2;
-
-    color: #111827;
-
-    font-family: inherit;
-
-    font-size: 14px !important;
-
-    line-height: 1 !important;
-
-    transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-.input-group input::placeholder {
-    color: #a0af9c;
-}
-
-.input-group input:focus {
-    border-color: #635bff;
-
-    box-shadow:
-        0 0 0 3px rgba(99, 91, 255, 0.12);
-}
-
-
-/* =========================================================
-   LOGIN / REGISTER BUTTON
-========================================================= */
-/* =========================================
-   LOGIN / REGISTER SECTION
-========================================= */
-
-.auth-section {
-    min-height: 650px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 70px 20px;
-
-    background: #e8f0e6;
-}
-
-
-/* =========================================
-   LOGIN CARD
-========================================= */
-
-.auth-container {
-    width: 100%;
-    max-width: 500px;
-
-    padding: 42px;
-
-    background: #dce8dc;
-
-    border: 1px solid #c8d8ca;
-    border-radius: 16px;
-
-    box-shadow: 0 10px 30px rgba(23, 61, 53, 0.08);
-
-    text-align: left;
-
-    /* Only card properties transition */
-    transition:
-        transform 0.3s ease,
-        box-shadow 0.3s ease,
-        background-color 0.3s ease;
-}
-
-
-/* =========================================
-   CARD HOVER
-   ========================================= */
-
-.auth-container:hover {
-    transform: translateY(-5px);
-
-    background: #c1dec3;
-
-    box-shadow:
-        0 18px 40px rgba(23, 61, 53, 0.16);
-}
-
-
-/* =========================================
-   LOGIN TITLE
-========================================= */
-
-.auth-container h2 {
-    text-align: center;
-
-    font-size: 32px;
-    font-weight: 700;
-
-    color: #173d35;
-
-    margin: 0 0 8px 0;
-}
-
-
-/* =========================================
-   SUBTITLE
-========================================= */
-
-.auth-subtitle {
-    text-align: center;
-
-    font-size: 15px;
-
-    color: #6f7f78;
-
-    margin: 0 0 32px 0;
-}
-
-
-/* =========================================
-   BACKEND MESSAGE
-========================================= */
-
-.login-message {
-    width: 100%;
-
-    display: flex;
-    align-items: center;
-
-    gap: 14px;
-
-    padding: 15px 18px;
-
-    margin-bottom: 22px;
-
-    border-radius: 9px;
-
-    font-size: 14px;
-
-    box-sizing: border-box;
-}
-
-
-/* Success message */
-
-.login-message.success {
-    background: #edf7ef;
-
-    border: 1px solid #9bc9a5;
-
-    color: #276738;
-}
-
-
-/* Error message */
-
-.login-message.error {
-    background: #fff1f1;
-
-    border: 1px solid #f3b5b5;
-
-    color: #d62828;
-}
-
-
-/* Message icon */
-
-.message-icon {
-    font-weight: 700;
-
-    font-size: 16px;
-}
-
-
-/* =========================================
-   INPUT GROUP
-========================================= */
-
-.input-group {
-    margin-bottom: 22px;
-}
-
-
-/* =========================================
-   LABEL
-========================================= */
-
-.input-group label {
-    display: block;
-
-    font-size: 14px;
-
-    font-weight: 600;
-
-    color: #173d35;
-
-    margin-bottom: 8px;
-}
-
-
-/* =========================================
-   INPUT
-========================================= */
-
-.input-group input {
-    width: 100%;
-
-    height: 54px;
-
-    padding: 0 16px;
-
-    border: 1px solid #c5d0d3;
-
-    border-radius: 9px;
-
-    outline: none;
-
-    background: #aebcc5;
-
-    color: #ffffff;
-
-    font-family: "Segoe UI", Arial, sans-serif;
-
-    font-size: 15px;
-
-    box-sizing: border-box;
-
-    transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-
-/* =========================================
-   PLACEHOLDER
-========================================= */
-
-.input-group input::placeholder {
-    color: #f5f5f5;
-    opacity: 0.9;
-}
-
-
-/* =========================================
-   INPUT HOVER
-   Keep the input unchanged when hovering
-========================================= */
-
-.input-group input:hover {
-    border-color: #c5d0d3;
-
-    background: #aebcc5;
-
-    box-shadow: none;
-}
-
-
-/* =========================================
-   INPUT FOCUS
-   Only changes when actually selected
-========================================= */
-
-.input-group input:focus {
-    border-color: #51776a;
-
-    background: #aebcc5;
-
-    box-shadow:
-        0 0 0 3px rgba(81, 119, 106, 0.12);
-}
-
-
-/* =========================================
-   LOGIN / REGISTER BUTTON
-========================================= */
-
-.auth-button {
-    width: 100%;
-
-    height: 54px;
-
-    border: none;
-
-    border-radius: 9px;
-
-    background: #3f6b38;
-
-    color: #ffffff;
-
-    font-family: "Segoe UI", Arial, sans-serif;
-
-    font-size: 16px;
-
-    font-weight: 600;
-
-    cursor: pointer;
-
-    transition:
-        background 0.2s ease,
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-
-/* Button hover */
-
-.auth-button:hover {
-    background: #345c2f;
-
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 8px 18px rgba(63, 107, 56, 0.25);
-}
-
-
-/* Button click */
-
-.auth-button:active {
-    transform: translateY(0);
-
-    box-shadow: none;
-}
-
-
-/* Disabled button */
-
-.auth-button:disabled {
-    opacity: 0.65;
-
-    cursor: not-allowed;
-
-    transform: none;
-
-    box-shadow: none;
-}
-
-
-/* =========================================
-   SWITCH LOGIN / REGISTER
-========================================= */
-
-.switch-button {
-    display: block;
-
-    width: 100%;
-
-    margin-top: 22px;
-
-    padding: 10px;
-
-    border: none;
-
-    background: transparent;
-
-    color: #173d35;
-
-    font-family: "Segoe UI", Arial, sans-serif;
-
-    font-size: 14px;
-
-    font-weight: 500;
-
-    cursor: pointer;
-
-    transition: color 0.2s ease;
-}
-
-
-/* Switch hover */
-
-.switch-button:hover {
-    color: #b59a45;
-
-    text-decoration: underline;
-}
-
-
-/* =========================================
-   MOBILE
-========================================= */
-
-@media (max-width: 700px) {
-
-    .auth-section {
-        padding: 50px 15px;
-    }
-
-    .auth-container {
-        max-width: 100%;
-
-        padding: 30px 22px;
-
-        border-radius: 14px;
-    }
-
-    .auth-container h2 {
-        font-size: 27px;
-    }
-
-    .auth-subtitle {
-        font-size: 14px;
-    }
-
-    .input-group input {
-        height: 50px;
-    }
-
-    .auth-button {
-        height: 50px;
-    }
-}
-
-
-/* =========================================
-   SMALL MOBILE
-========================================= */
-
-@media (max-width: 400px) {
-
-    .auth-container {
-        padding: 25px 18px;
-    }
-
-    .auth-container h2 {
-        font-size: 24px;
-    }
-
-    .input-group input {
-        height: 48px;
-    }
-
-    .auth-button {
-        height: 48px;
-    }
-}
-
-/* =========================================================
-   CONTACT SECTION
-========================================================= */
-
-/* =========================================
-   CONTACT SECTION
-========================================= */
-
-.contact-section {
-    width: 100%;
-    min-height: 30px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    padding: 10px;
-
-    text-align: center;
-
-    background: #D7E6E1;
-
-    box-sizing: border-box;
-}
-
-
-/* =========================================
-   CONTACT TITLE
-========================================= */
-
-.contact-section h2 {
-    font-size: 34px;
-
-    font-weight: 700;
-
-    color: #173D35;
-
-    margin: 0 0 12px;
-
-    position: relative;
-}
-
-
-/* GOLD UNDERLINE */
-
-.contact-section h2::after {
-    content: "";
-
-    display: block;
-
-    width: 45px;
-    height: 3px;
-
-    margin: 12px auto 0;
-
-    border-radius: 3px;
-
-    background: #B59A45;
-}
-
-
-/* =========================================
-   CONTACT DESCRIPTION
-========================================= */
-
-.contact-section p {
-    font-size: 16px;
+.info-card p,
+.contact-card p {
+    color: #718692;
 
     line-height: 1.6;
-
-    color: #51776A;
-
-    margin: 0 0 28px;
 }
 
 
-/* =========================================
-   CONTACT CARD
-========================================= */
+/* CONTACT */
 
-.contact-container {
-    display: flex;
+.contact-grid {
+    max-width: 650px;
 
-    justify-content: center;
+    margin: 50px auto 0;
 
-    gap: 20px;
+    display: grid;
 
-    width: 100%;
+    grid-template-columns:
+        repeat(2, 1fr);
 
-    max-width: 700px;
+    gap: 25px;
 }
 
 
-/* =========================================
-   CONTACT CARD ITEM
-========================================= */
+/* RESPONSIVE */
 
-.contact-card {
-    min-width: 20px;
+@media (max-width: 800px) {
 
-    padding: 10px 15px;
-
-    background: #F8F6EF;
-
-    border: 3px solid #D5E0D5;
-
-    border-radius: 10px;
-
-    box-shadow: 0 5px 18px rgba(23, 61, 53, 0.08);
-
-    transition: all 0.25s ease;
-}
-
-
-/* HOVER */
-
-.contact-card:hover {
-    transform: translateY(-4px);
-
-    border-color: #B59A45;
-
-    box-shadow: 0 8px 22px rgba(23, 61, 53, 0.12);
-}
-
-
-/* CARD TITLE */
-
-.contact-card h3 {
-    margin: 0 0 6px;
-    align-items: center;
-    font-size: 15px;
-
-    font-weight: 600;
-
-    color: #173D35;
-}
-
-
-/* CARD TEXT */
-
-.contact-card p {
-    margin: 0;
-
-    font-size: 13px;
-
-    color: #7B8983;
-}
-
-
-/* =========================================
-   MOBILE
-========================================= */
-
-@media (max-width: 700px) {
-
-    .contact-section {
-        min-height: 150px;
-
-        padding: 60px 20px;
-    }
-
-    .contact-section h2 {
-        font-size: 28px;
-    }
-
-    .contact-section p {
-        font-size: 14px;
-    }
-
-    .contact-container {
-        flex-direction: column;
-
-        align-items: center;
-
-        gap: 12px;
-    }
-
-    .contact-card {
-        width: 100%;
-
-        max-width: 300px;
-
-        padding: 16px 20px;
-    }
-}
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-.footer {
-    width: 100%;
-
-    padding: 22px 20px;
-
-    text-align: center;
-
-    background: #11271c;
-
-    color: #F7F3EA;
-}
-
-.footer p {
-    margin: 0;
-
-    font-size: 13px !important;
-    line-height: 1.5 !important;
-}
-
-
-/* =========================================================
-   TABLET
-========================================================= */
-
-@media (max-width: 900px) {
-
-    .home-content h1 {
-        font-size: 36px !important;
-    }
-
-    .services-container {
-        grid-template-columns: 1fr 1fr;
-    }
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 700px) {
-
-    .home-section {
-        min-height: 450px;
-
-        padding: 50px 20px;
-    }
-
-    .home-content h1 {
-        font-size: 30px !important;
-    }
-
-    .home-content p {
-        font-size: 15px !important;
-    }
-
-
-    .about-section,
-    .services-section,
-    .contact-section {
-        padding: 55px 20px;
-    }
-
-
-    .about-section h2,
-    .services-section h2,
-    .contact-section h2 {
-        font-size: 25px !important;
-    }
-
-
-    .services-container {
+    .info-grid,
+    .contact-grid {
         grid-template-columns: 1fr;
-
-        max-width: 450px;
     }
 
-
-    .auth-section {
-        min-height: 500px;
-
-        padding: 45px 15px;
-    }
-
-
-    .auth-container {
-        max-width: 400px;
-
-        padding: 28px 22px;
-
-        border-radius: 12px;
-    }
-
-
-    .auth-container h2 {
-        font-size: 24px !important;
-    }
-}
-
-
-/* =========================================================
-   SMALL MOBILE
-========================================================= */
-
-@media (max-width: 400px) {
-
-    .home-content h1 {
-        font-size: 27px !important;
-    }
-
-    .home-content p {
-        font-size: 14px !important;
-    }
-
-    .auth-container {
-        padding: 25px 18px;
-    }
-
-    .auth-container h2 {
-        font-size: 22px !important;
-    }
-
-    .input-group input {
-        height: 43px;
-    }
-
-    .auth-button {
-        height: 43px;
+    .simple-page h1 {
+        font-size: 34px;
     }
 }

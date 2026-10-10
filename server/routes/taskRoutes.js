@@ -4,32 +4,53 @@ const authMiddleware = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
+
+// ======================================================
 // CREATE TASK
+// POST /api/tasks
+// ======================================================
+
 router.post("/", authMiddleware, (req, res) => {
-    const { title, description, due_date } = req.body;
 
-    const user_id = req.user.id;
+    const {
+        title,
+        description,
+        deadline,
+        priority
+    } = req.body;
 
-    if (!title) {
+    if (!title || title.trim() === "") {
         return res.status(400).json({
             message: "Task title is required"
         });
     }
 
+    const userId = req.user.id;
+
     const sql = `
-        INSERT INTO tasks (user_id, title, description, due_date)
-        VALUES (?, ?, ?, ?)
+        INSERT INTO tasks
+        (user_id, title, description, deadline, priority, completed)
+        VALUES (?, ?, ?, ?, ?, ?)
     `;
 
     db.query(
         sql,
-        [user_id, title, description || null, due_date || null],
+        [
+            userId,
+            title.trim(),
+            description || "",
+            deadline || null,
+            priority || "Medium",
+            0
+        ],
         (err, result) => {
+
             if (err) {
-                console.error(err);
+                console.error("CREATE TASK ERROR:", err);
 
                 return res.status(500).json({
-                    message: "Failed to create task"
+                    message: "Failed to create task",
+                    error: err.message
                 });
             }
 
@@ -37,72 +58,114 @@ router.post("/", authMiddleware, (req, res) => {
                 message: "Task created successfully",
                 task: {
                     id: result.insertId,
-                    user_id,
-                    title,
-                    description: description || null,
-                    due_date: due_date || null,
-                    status: "pending"
+                    user_id: userId,
+                    title: title.trim(),
+                    description: description || "",
+                    deadline: deadline || null,
+                    priority: priority || "Medium",
+                    completed: 0
                 }
             });
         }
     );
 });
 
-// GET USER TASKS
+
+// ======================================================
+// GET ALL TASKS
+// GET /api/tasks
+// ======================================================
+
 router.get("/", authMiddleware, (req, res) => {
-    const user_id = req.user.id;
+
+    const userId = req.user.id;
 
     const sql = `
-        SELECT id, title, description, due_date, status, created_at
+        SELECT
+            id,
+            user_id,
+            title,
+            description,
+            deadline,
+            priority,
+            completed,
+            created_at
         FROM tasks
         WHERE user_id = ?
-        ORDER BY created_at DESC
+        ORDER BY id DESC
     `;
 
-    db.query(sql, [user_id], (err, results) => {
+    db.query(sql, [userId], (err, results) => {
+
         if (err) {
-            console.error(err);
+            console.error("GET TASKS ERROR:", err);
 
             return res.status(500).json({
-                message: "Failed to fetch tasks"
+                message: "Failed to get tasks",
+                error: err.message
             });
         }
 
-        return res.status(200).json({
-            tasks: results
-        });
+        return res.status(200).json(results);
     });
 });
 
-// UPDATE TASK
-router.put("/:id", authMiddleware, (req, res) => {
-    const taskId = req.params.id;
-    const user_id = req.user.id;
 
-    const { title, description, due_date, status } = req.body;
+// ======================================================
+// UPDATE TASK
+// PUT /api/tasks/:id
+// ======================================================
+
+router.put("/:id", authMiddleware, (req, res) => {
+
+    const taskId = req.params.id;
+    const userId = req.user.id;
+
+    const {
+        title,
+        description,
+        deadline,
+        priority,
+        completed
+    } = req.body;
+
+    if (!title || title.trim() === "") {
+        return res.status(400).json({
+            message: "Task title is required"
+        });
+    }
 
     const sql = `
         UPDATE tasks
-        SET title = ?, description = ?, due_date = ?, status = ?
-        WHERE id = ? AND user_id = ?
+        SET
+            title = ?,
+            description = ?,
+            deadline = ?,
+            priority = ?,
+            completed = ?
+        WHERE id = ?
+        AND user_id = ?
     `;
 
     db.query(
         sql,
         [
-            title,
-            description || null,
-            due_date || null,
-            status,
+            title.trim(),
+            description || "",
+            deadline || null,
+            priority || "Medium",
+            completed ? 1 : 0,
             taskId,
-            user_id
+            userId
         ],
         (err, result) => {
+
             if (err) {
-                console.error(err);
+                console.error("UPDATE TASK ERROR:", err);
 
                 return res.status(500).json({
-                    message: "Failed to update task"
+                    message: "Failed to update task",
+                    error: err.message
                 });
             }
 
@@ -119,35 +182,48 @@ router.put("/:id", authMiddleware, (req, res) => {
     );
 });
 
+
+// ======================================================
 // DELETE TASK
+// DELETE /api/tasks/:id
+// ======================================================
+
 router.delete("/:id", authMiddleware, (req, res) => {
+
     const taskId = req.params.id;
-    const user_id = req.user.id;
+    const userId = req.user.id;
 
     const sql = `
         DELETE FROM tasks
-        WHERE id = ? AND user_id = ?
+        WHERE id = ?
+        AND user_id = ?
     `;
 
-    db.query(sql, [taskId, user_id], (err, result) => {
-        if (err) {
-            console.error(err);
+    db.query(
+        sql,
+        [taskId, userId],
+        (err, result) => {
 
-            return res.status(500).json({
-                message: "Failed to delete task"
+            if (err) {
+                console.error("DELETE TASK ERROR:", err);
+
+                return res.status(500).json({
+                    message: "Failed to delete task",
+                    error: err.message
+                });
+            }
+
+            if (result.affectedRows === 0) {
+                return res.status(404).json({
+                    message: "Task not found"
+                });
+            }
+
+            return res.status(200).json({
+                message: "Task deleted successfully"
             });
         }
-
-        if (result.affectedRows === 0) {
-            return res.status(404).json({
-                message: "Task not found"
-            });
-        }
-
-        return res.status(200).json({
-            message: "Task deleted successfully"
-        });
-    });
+    );
 });
 
 

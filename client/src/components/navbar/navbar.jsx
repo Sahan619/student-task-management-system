@@ -1,82 +1,102 @@
-import React from "react";
 import "./navbar.css";
-import logo from "../../assets/logo.png";
 
-function Navbar() {
-
-    const handleLogin = () => {
-        const loginSection = document.getElementById("login");
-
-        if (loginSection) {
-            loginSection.scrollIntoView({
-                behavior: "smooth"
-            });
-        }
-    };
+function Navbar({
+    isLoggedIn,
+    onNavigate,
+    onLogout
+}) {
 
     return (
-        <nav className="stm-navbar">
+        <nav className="navbar">
 
-            {/* Brand */}
-            <div className="stm-brand">
-
-                <div className="stm-logo-wrapper">
-                    <img
-                        src={logo}
-                        alt="Student Task Manager"
-                        onError={(e) => {
-                            e.currentTarget.style.display = "none";
-                            e.currentTarget.nextElementSibling.style.display = "flex";
-                        }}
-                    />
-
-                    {/* Fallback if logo doesn't load */}
-                    <div className="stm-logo-fallback">
-                        STM
-                    </div>
+            <div
+                className="navbar-brand"
+                onClick={() => onNavigate("home")}
+            >
+                <div className="brand-short">
+                    STM
                 </div>
 
-                <span className="stm-brand-name">
-                    Student Task Manager
-                    <p className="discription">Keep on track and explore your path</p>
-                </span>
+                <div>
+                    <h2>
+                        Student Task Manager
+                    </h2>
 
-
-                
-
+                    <span>
+                        Keep on track and explore your path
+                    </span>
+                </div>
             </div>
 
 
-            {/* Navigation */}
-            <div className="stm-nav-links">
+            <div className="navbar-links">
 
-                <a href="#home" className="active">
+                <button
+                    onClick={() => onNavigate("home")}
+                >
                     Home
-                </a>
+                </button>
 
-                <a href="#about">
+                <button
+                    onClick={() => onNavigate("about")}
+                >
                     About Us
-                </a>
+                </button>
 
-                <a href="#services">
+                <button
+                    onClick={() => onNavigate("services")}
+                >
                     Services
-                </a>
+                </button>
 
-                <a href="#contact">
+                <button
+                    onClick={() => onNavigate("contact")}
+                >
                     Contact Us
-                </a>
+                </button>
+
+
+                {!isLoggedIn ? (
+
+                    <button
+                        className="nav-login"
+                        onClick={() => onNavigate("login")}
+                    >
+                        Login
+                    </button>
+
+                ) : (
+
+                    <>
+                        <button
+                            className="nav-dashboard"
+                            onClick={() =>
+                                onNavigate("dashboard")
+                            }
+                        >
+                            Dashboard
+                        </button>
+
+                        <button
+                            className="nav-task"
+                            onClick={() =>
+                                onNavigate("tasks")
+                            }
+                        >
+                            My Tasks
+                        </button>
+
+                        <button
+                            className="nav-logout"
+                            onClick={onLogout}
+                        >
+                            Logout
+                        </button>
+                    </>
+
+                )}
 
             </div>
-
-
-            {/* Login */}
-            <button
-                type="button"
-                className="stm-login-btn"
-                onClick={handleLogin}
-            >
-                Login
-            </button>
 
         </nav>
     );

@@ -1,0 +1,318 @@
+.task-section {
+    width: 100%;
+    min-height: 100vh;
+    padding: 50px 40px;
+    background: #F7F3EA;
+}
+
+.task-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+}
+
+.task-card {
+    background: #FFFDF8;
+    border: 1px solid #D3DED5;
+    border-radius: 22px;
+    padding: 38px;
+    box-shadow: 0 10px 30px rgba(27, 67, 61, 0.08);
+}
+
+.task-icon {
+    width: 60px;
+    height: 60px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 16px;
+
+    background: #DCE8DD;
+    color: #557F74;
+
+    font-size: 36px;
+    margin-bottom: 25px;
+}
+
+.task-card h1 {
+    margin: 0 0 8px;
+
+    color: #123F38;
+
+    font-size: 30px;
+}
+
+.task-subtitle {
+    margin-bottom: 28px;
+
+    color: #68828A;
+
+    font-size: 17px;
+}
+
+.task-card label {
+    display: block;
+
+    margin: 20px 0 8px;
+
+    color: #123F38;
+
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.task-card input,
+.task-card textarea,
+.task-card select {
+    width: 100%;
+
+    padding: 15px 16px;
+
+    border: 1px solid #B9CCC7;
+
+    border-radius: 11px;
+
+    background: #FFFFFF;
+
+    color: #123F38;
+
+    font-size: 16px;
+
+    outline: none;
+}
+
+.task-card input:focus,
+.task-card textarea:focus,
+.task-card select:focus {
+    border-color: #557F74;
+
+    box-shadow: 0 0 0 3px rgba(85, 127, 116, 0.12);
+}
+
+.task-card textarea {
+    min-height: 120px;
+
+    resize: vertical;
+}
+
+.task-card form button {
+    width: 100%;
+
+    margin-top: 25px;
+
+    padding: 15px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #315F4A;
+
+    color: white;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.task-card form button:hover {
+    background: #254B3A;
+
+    transform: translateY(-1px);
+}
+
+.task-card form button:disabled {
+    opacity: 0.6;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+.task-count {
+    color: #68828A;
+
+    margin: 10px 0 25px;
+}
+
+.task-error,
+.task-success {
+    padding: 14px 16px;
+
+    margin: 20px 0;
+
+    border-radius: 10px;
+
+    font-size: 15px;
+}
+
+.task-error {
+    background: #FFF0F0;
+
+    border: 1px solid #F4B9B9;
+
+    color: #D92D20;
+}
+
+.task-success {
+    background: #EAF5EC;
+
+    border: 1px solid #B9D8BE;
+
+    color: #315F4A;
+}
+
+.no-tasks {
+    padding: 50px 10px;
+
+    text-align: center;
+
+    color: #81939A;
+
+    font-size: 16px;
+}
+
+.task-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+}
+
+.task-item {
+    padding: 20px;
+
+    border: 1px solid #D5E0DB;
+
+    border-radius: 14px;
+
+    background: #FDFBF6;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    transition: 0.2s;
+}
+
+.task-item:hover {
+    border-color: #557F74;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 5px 15px rgba(27, 67, 61, 0.08);
+}
+
+.task-item.completed {
+    opacity: 0.65;
+}
+
+.task-item.completed h3 {
+    text-decoration: line-through;
+}
+
+.task-item h3 {
+    margin: 0 0 8px;
+
+    color: #123F38;
+
+    font-size: 19px;
+}
+
+.task-item p {
+    margin: 0 0 10px;
+
+    color: #68828A;
+
+    line-height: 1.5;
+}
+
+.task-item small {
+    display: block;
+
+    color: #81939A;
+
+    margin-top: 5px;
+}
+
+.task-buttons {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.task-buttons button {
+    min-width: 90px;
+
+    padding: 9px 12px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #557F74;
+
+    color: white;
+
+    cursor: pointer;
+
+    font-weight: 600;
+}
+
+.task-buttons button:hover {
+    background: #315F4A;
+}
+
+.task-buttons .delete-button {
+    background: #B85C5C;
+}
+
+.task-buttons .delete-button:hover {
+    background: #963F3F;
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 850px) {
+
+    .task-section {
+        padding: 30px 20px;
+    }
+
+    .task-container {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media (max-width: 500px) {
+
+    .task-card {
+        padding: 25px;
+    }
+
+    .task-item {
+        flex-direction: column;
+    }
+
+    .task-buttons {
+        flex-direction: row;
+    }
+
+}

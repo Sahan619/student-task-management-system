@@ -1,85 +1,64 @@
-import React, { useEffect, useState } from "react";
-import "./Tasks.css";
+
+import { useEffect, useState } from "react";
+import "./tasks.css";
 
 function TaskManagement() {
-
     const [tasks, setTasks] = useState([]);
-
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [deadline, setDeadline] = useState("");
     const [priority, setPriority] = useState("Medium");
-
     const [message, setMessage] = useState("");
     const [loading, setLoading] = useState(false);
 
     const API_URL = "http://localhost:5000/api/tasks";
 
-    // =====================================================
-    // GET TASKS
-    // =====================================================
-
-    const fetchTasks = async () => {
-
-        try {
-
-            const token = localStorage.getItem("token");
-
-            if (!token) {
-                setMessage("Please login first.");
-                return;
-            }
-
-            const response = await fetch(API_URL, {
-                method: "GET",
-
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`
-                }
-            });
-
-            const data = await response.json();
-
-            console.log("GET TASKS RESPONSE:", data);
-
-            if (!response.ok) {
-
-                setMessage(
-                    data.message || "Failed to fetch tasks"
-                );
-
-                return;
-            }
-
-            setTasks(data);
-            setMessage("");
-
-        } catch (error) {
-
-            console.error("FETCH TASKS ERROR:", error);
-
-            setMessage(
-                "Unable to connect to the server."
-            );
-        }
-    };
-
-
-    // Load tasks when page opens
     useEffect(() => {
+        let cancelled = false;
+
+        async function fetchTasks() {
+            try {
+                const token = localStorage.getItem("token");
+
+                if (!token) {
+                    if (!cancelled) setMessage("Please login first.");
+                    return;
+                }
+
+                const response = await fetch(API_URL, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                const data = await response.json();
+
+                if (cancelled) return;
+
+                if (!response.ok) {
+                    setMessage(data.message || "Failed to fetch tasks");
+                    return;
+                }
+
+                setTasks(data);
+                setMessage("");
+            } catch (error) {
+                if (!cancelled) {
+                    console.error("FETCH TASKS ERROR:", error);
+                    setMessage("Unable to connect to the server.");
+                }
+            }
+        }
+
         fetchTasks();
+
+        return () => {
+            cancelled = true;
+        };
     }, []);
 
-
-    // =====================================================
-    // CREATE TASK
-    // =====================================================
-
     const handleCreateTask = async (e) => {
-
         e.preventDefault();
-
         setMessage("");
 
         if (!title.trim()) {
@@ -87,390 +66,227 @@ function TaskManagement() {
             return;
         }
 
-        try {
+        const token = localStorage.getItem("token");
 
+        if (!token) {
+            setMessage("Please login first.");
+            return;
+        }
+
+        try {
             setLoading(true);
 
-            const token = localStorage.getItem("token");
-
-            if (!token) {
-                setMessage("Please login first.");
-                return;
-            }
-
             const response = await fetch(API_URL, {
-
                 method: "POST",
-
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`
+                    Authorization: `Bearer ${token}`,
                 },
-
                 body: JSON.stringify({
-                    title: title,
-                    description: description,
+                    title: title.trim(),
+                    description,
                     deadline: deadline || null,
-                    priority: priority
-                })
+                    priority,
+                }),
             });
 
             const data = await response.json();
 
-            console.log("CREATE TASK RESPONSE:", data);
-
             if (!response.ok) {
-
-                setMessage(
-                    data.message || "Failed to create task"
-                );
-
+                setMessage(data.message || "Failed to create task");
                 return;
             }
 
-            // Add newly created task to screen
-            setTasks((previousTasks) => [
-                data.task,
-                ...previousTasks
-            ]);
-
-            // Clear form
+            setTasks((previousTasks) => [data.task, ...previousTasks]);
             setTitle("");
             setDescription("");
             setDeadline("");
             setPriority("Medium");
-
-            setMessage("Task created successfully!");
-
+            setMessage("Task created successfully.");
         } catch (error) {
-
             console.error("CREATE TASK ERROR:", error);
-
-            setMessage(
-                "Unable to connect to the server."
-            );
-
+            setMessage("Unable to connect to the server.");
         } finally {
             setLoading(false);
         }
     };
 
+    const handleUpdateTask = async (task) => {
+        const token = localStorage.getItem("token");
 
-    // =====================================================
-    // DELETE TASK
-    // =====================================================
-
-    const handleDelete = async (taskId) => {
-
-        try {
-
-            const token = localStorage.getItem("token");
-
-            const response = await fetch(
-                `${API_URL}/${taskId}`,
-                {
-                    method: "DELETE",
-
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${token}`
-                    }
-                }
-            );
-
-            const data = await response.json();
-
-            if (!response.ok) {
-
-                setMessage(
-                    data.message || "Failed to delete task"
-                );
-
-                return;
-            }
-
-            setTasks((previousTasks) =>
-                previousTasks.filter(
-                    (task) => task.id !== taskId
-                )
-            );
-
-            setMessage("Task deleted successfully.");
-
-        } catch (error) {
-
-            console.error("DELETE ERROR:", error);
-
-            setMessage(
-                "Unable to connect to the server."
-            );
+        if (!token) {
+            setMessage("Please login first.");
+            return;
         }
-    };
-
-
-    // =====================================================
-    // COMPLETE TASK
-    // =====================================================
-
-    const handleComplete = async (task) => {
 
         try {
-
-            const token = localStorage.getItem("token");
-
-            const response = await fetch(
-                `${API_URL}/${task.id}`,
-                {
-                    method: "PUT",
-
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${token}`
-                    },
-
-                    body: JSON.stringify({
-                        title: task.title,
-                        description: task.description,
-                        deadline: task.deadline,
-                        priority: task.priority,
-                        completed: task.completed ? 0 : 1
-                    })
-                }
-            );
+            const response = await fetch(`${API_URL}/${task.id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify({
+                    title: task.title,
+                    description: task.description || "",
+                    deadline: task.deadline || null,
+                    priority: task.priority || "Medium",
+                    completed: !task.completed,
+                }),
+            });
 
             const data = await response.json();
 
             if (!response.ok) {
-
-                setMessage(
-                    data.message || "Failed to update task"
-                );
-
+                setMessage(data.message || "Failed to update task");
                 return;
             }
 
             setTasks((previousTasks) =>
                 previousTasks.map((item) =>
                     item.id === task.id
-                        ? {
-                            ...item,
-                            completed: task.completed ? 0 : 1
-                        }
+                        ? { ...item, completed: !item.completed }
                         : item
                 )
             );
 
+            setMessage("Task updated successfully.");
         } catch (error) {
-
-            console.error("UPDATE ERROR:", error);
-
-            setMessage(
-                "Unable to connect to the server."
-            );
+            console.error("UPDATE TASK ERROR:", error);
+            setMessage("Unable to connect to the server.");
         }
     };
 
+    const handleDeleteTask = async (taskId) => {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+            setMessage("Please login first.");
+            return;
+        }
+
+        try {
+            const response = await fetch(`${API_URL}/${taskId}`, {
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                setMessage(data.message || "Failed to delete task");
+                return;
+            }
+
+            setTasks((previousTasks) =>
+                previousTasks.filter((task) => task.id !== taskId)
+            );
+
+            setMessage("Task deleted successfully.");
+        } catch (error) {
+            console.error("DELETE TASK ERROR:", error);
+            setMessage("Unable to connect to the server.");
+        }
+    };
 
     return (
+        <div className="task-container">
+            <h1>Task Management</h1>
 
-        <section className="task-section">
+            {message && <p role="status">{message}</p>}
 
-            <div className="task-container">
-
-                {/* =====================================
-                    CREATE TASK
-                ====================================== */}
-
-                <div className="task-card">
-
-                    <div className="task-icon">
-                        ✓
-                    </div>
-
-                    <h1>Add New Task</h1>
-
-                    <p className="task-subtitle">
-                        Create and organize your academic tasks
-                    </p>
-
-                    {message && (
-                        <div
-                            className={
-                                message.includes("successfully")
-                                    ? "task-success"
-                                    : "task-error"
-                            }
-                        >
-                            {message}
-                        </div>
-                    )}
-
-                    <form onSubmit={handleCreateTask}>
-
-                        <label>Task Title</label>
-
-                        <input
-                            type="text"
-                            placeholder="Enter task title"
-                            value={title}
-                            onChange={(e) =>
-                                setTitle(e.target.value)
-                            }
-                        />
-
-                        <label>Description</label>
-
-                        <textarea
-                            placeholder="Enter task description"
-                            value={description}
-                            onChange={(e) =>
-                                setDescription(e.target.value)
-                            }
-                        />
-
-                        <label>Deadline</label>
-
-                        <input
-                            type="date"
-                            value={deadline}
-                            onChange={(e) =>
-                                setDeadline(e.target.value)
-                            }
-                        />
-
-                        <label>Priority</label>
-
-                        <select
-                            value={priority}
-                            onChange={(e) =>
-                                setPriority(e.target.value)
-                            }
-                        >
-                            <option value="Low">
-                                Low
-                            </option>
-
-                            <option value="Medium">
-                                Medium
-                            </option>
-
-                            <option value="High">
-                                High
-                            </option>
-                        </select>
-
-                        <button
-                            type="submit"
-                            disabled={loading}
-                        >
-                            {loading
-                                ? "Creating..."
-                                : "Add Task"}
-                        </button>
-
-                    </form>
-
+            <form onSubmit={handleCreateTask}>
+                <div>
+                    <label htmlFor="title">Task title</label>
+                    <input
+                        id="title"
+                        type="text"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                        placeholder="Enter task title"
+                        required
+                    />
                 </div>
 
+                <div>
+                    <label htmlFor="description">Description</label>
+                    <textarea
+                        id="description"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        placeholder="Enter task description"
+                    />
+                </div>
 
-                {/* =====================================
-                    MY TASKS
-                ====================================== */}
+                <div>
+                    <label htmlFor="deadline">Deadline</label>
+                    <input
+                        id="deadline"
+                        type="date"
+                        value={deadline}
+                        onChange={(e) => setDeadline(e.target.value)}
+                    />
+                </div>
 
-                <div className="task-card">
+                <div>
+                    <label htmlFor="priority">Priority</label>
+                    <select
+                        id="priority"
+                        value={priority}
+                        onChange={(e) => setPriority(e.target.value)}
+                    >
+                        <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                    </select>
+                </div>
 
-                    <h1>My Tasks</h1>
+                <button type="submit" disabled={loading}>
+                    {loading ? "Creating..." : "Add Task"}
+                </button>
+            </form>
 
-                    <p className="task-count">
-                        {tasks.length}{" "}
-                        {tasks.length === 1
-                            ? "task"
-                            : "tasks"}
-                    </p>
+            <section>
+                <h2>Your Tasks</h2>
 
-                    {tasks.length === 0 ? (
+                {tasks.length === 0 ? (
+                    <p>No tasks found.</p>
+                ) : (
+                    <ul>
+                        {tasks.map((task) => (
+                            <li key={task.id}>
+                                <h3>
+                                    {task.title}{" "}
+                                    {task.completed && "(Completed)"}
+                                </h3>
 
-                        <div className="no-tasks">
-                            No tasks yet.
-                        </div>
+                                <p>{task.description}</p>
+                                <p>Deadline: {task.deadline || "Not set"}</p>
+                                <p>Priority: {task.priority}</p>
 
-                    ) : (
-
-                        <div className="task-list">
-
-                            {tasks.map((task) => (
-
-                                <div
-                                    className={
-                                        task.completed
-                                            ? "task-item completed"
-                                            : "task-item"
-                                    }
-                                    key={task.id}
+                                <button
+                                    type="button"
+                                    onClick={() => handleUpdateTask(task)}
                                 >
+                                    {task.completed
+                                        ? "Mark Incomplete"
+                                        : "Mark Complete"}
+                                </button>
 
-                                    <div>
-
-                                        <h3>
-                                            {task.title}
-                                        </h3>
-
-                                        <p>
-                                            {task.description}
-                                        </p>
-
-                                        <small>
-                                            Priority:{" "}
-                                            {task.priority}
-                                        </small>
-
-                                        {task.deadline && (
-                                            <small>
-                                                Deadline:{" "}
-                                                {new Date(
-                                                    task.deadline
-                                                ).toLocaleDateString()}
-                                            </small>
-                                        )}
-
-                                    </div>
-
-                                    <div className="task-buttons">
-
-                                        <button
-                                            onClick={() =>
-                                                handleComplete(task)
-                                            }
-                                        >
-                                            {task.completed
-                                                ? "Undo"
-                                                : "Complete"}
-                                        </button>
-
-                                        <button
-                                            onClick={() =>
-                                                handleDelete(task.id)
-                                            }
-                                            className="delete-button"
-                                        >
-                                            Delete
-                                        </button>
-
-                                    </div>
-
-                                </div>
-
-                            ))}
-
-                        </div>
-
-                    )}
-
-                </div>
-
-            </div>
-
-        </section>
+                                <button
+                                    type="button"
+                                    onClick={() => handleDeleteTask(task.id)}
+                                >
+                                    Delete
+                                </button>
+                            </li>
+                        ))}
+                    </ul>
+                )}
+            </section>
+        </div>
     );
 }
 

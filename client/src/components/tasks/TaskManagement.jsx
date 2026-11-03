@@ -1,6 +1,9 @@
 
 import { useEffect, useState } from "react";
 import "./tasks.css";
+import API_URL from "../../api";
+
+const TASKS_URL = `${API_URL}/tasks`;
 
 function TaskManagement() {
     const [tasks, setTasks] = useState([]);
@@ -10,8 +13,6 @@ function TaskManagement() {
     const [priority, setPriority] = useState("Medium");
     const [message, setMessage] = useState("");
     const [loading, setLoading] = useState(false);
-
-    const API_URL = "http://localhost:5000/api/tasks";
 
     useEffect(() => {
         let cancelled = false;
@@ -25,7 +26,7 @@ function TaskManagement() {
                     return;
                 }
 
-                const response = await fetch(API_URL, {
+                const response = await fetch(TASKS_URL, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -76,7 +77,7 @@ function TaskManagement() {
         try {
             setLoading(true);
 
-            const response = await fetch(API_URL, {
+            const response = await fetch(TASKS_URL, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -120,7 +121,7 @@ function TaskManagement() {
         }
 
         try {
-            const response = await fetch(`${API_URL}/${task.id}`, {
+            const response = await fetch(`${TASKS_URL}/${task.id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -166,7 +167,7 @@ function TaskManagement() {
         }
 
         try {
-            const response = await fetch(`${API_URL}/${taskId}`, {
+            const response = await fetch(`${TASKS_URL}/${taskId}`, {
                 method: "DELETE",
                 headers: {
                     Authorization: `Bearer ${token}`,

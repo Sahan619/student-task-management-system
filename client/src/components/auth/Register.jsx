@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./auth.css";
+import API_URL from "../../api";
 
 function Register({ onRegisterSuccess, onLoginClick }) {
 
@@ -15,6 +16,7 @@ function Register({ onRegisterSuccess, onLoginClick }) {
     const handleRegister = async (e) => {
 
         e.preventDefault();
+        console.log("REGISTER BUTTON SUBMITTED");
 
         setError("");
         setSuccess("");
@@ -36,7 +38,7 @@ function Register({ onRegisterSuccess, onLoginClick }) {
         try {
 
             const response = await fetch(
-                "http://localhost:5000/api/auth/register",
+                `${API_URL}/auth/register`,
                 {
                     method: "POST",
 
@@ -68,6 +70,10 @@ function Register({ onRegisterSuccess, onLoginClick }) {
             setName("");
             setEmail("");
             setPassword("");
+
+            if (typeof onRegisterSuccess === "function") {
+                onRegisterSuccess(data);
+            }
 
         } catch (error) {
 
@@ -123,13 +129,15 @@ function Register({ onRegisterSuccess, onLoginClick }) {
 
                     <div className="form-group">
 
-                        <label>
+                        <label htmlFor="register-name">
                             Full Name
                         </label>
 
                         <input
                             type="text"
+                            id="register-name"
                             placeholder="Enter your name"
+                            required
                             value={name}
                             onChange={(e) =>
                                 setName(e.target.value)
@@ -141,13 +149,15 @@ function Register({ onRegisterSuccess, onLoginClick }) {
 
                     <div className="form-group">
 
-                        <label>
+                        <label htmlFor="register-email">
                             Email
                         </label>
 
                         <input
                             type="email"
+                            id="register-email"
                             placeholder="Enter your email"
+                            required
                             value={email}
                             onChange={(e) =>
                                 setEmail(e.target.value)
@@ -159,13 +169,15 @@ function Register({ onRegisterSuccess, onLoginClick }) {
 
                     <div className="form-group">
 
-                        <label>
+                        <label htmlFor="register-password">
                             Password
                         </label>
 
                         <input
                             type="password"
+                            id="register-password"
                             placeholder="Create a password"
+                            required
                             value={password}
                             onChange={(e) =>
                                 setPassword(e.target.value)
@@ -176,6 +188,7 @@ function Register({ onRegisterSuccess, onLoginClick }) {
 
 
                     <button
+                        type="submit"
                         className="auth-button"
                         disabled={loading}
                     >

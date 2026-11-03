@@ -5,6 +5,8 @@ import Home from "./components/home/Home";
 import Dashboard from "./components/dashboard/Dashboard";
 import Services from "./components/services/Services";
 import TaskManagement from "./components/tasks/TaskManagement";
+import Register from "./components/auth/Register";
+import API_URL from "./api";
 
 import "./App.css";
 
@@ -76,8 +78,11 @@ function App() {
                     />
                 )}
                 {page === "register" && (
-                     <RegisterPage />
-   )} 
+                    <Register
+                        onRegisterSuccess={() => navigate("login")}
+                        onLoginClick={() => navigate("login")}
+                    />
+                )}
 
                 {page === "contact" && (
                     <ContactPage />
@@ -114,7 +119,7 @@ function LoginPage({ onLoginSuccess, onNavigate }) {
         try {
 
             const response = await fetch(
-                "http://localhost:5000/api/auth/login",
+                `${API_URL}/auth/login`,
                 {
                     method: "POST",
                     headers: {
@@ -357,66 +362,5 @@ function ContactPage() {
     );
 }
 
-
-/* ============================= */
-/* REGISTER PAGE */
-/* ============================= */
-
-function RegisterPage() {
-
-    return (
-        <section className="auth-page">
-
-            <div className="auth-card">
-
-                <div className="auth-icon">
-                    +
-                </div>
-
-                <h1>
-                    Create Account
-                </h1>
-
-                <p>
-                    Create your student account
-                </p>
-
-                <form>
-
-                    <label>Name</label>
-
-                    <input
-                        type="text"
-                        placeholder="Enter your name"
-                    />
-
-                    <label>Email</label>
-
-                    <input
-                        type="email"
-                        placeholder="Enter your email"
-                    />
-
-                    <label>Password</label>
-
-                    <input
-                        type="password"
-                        placeholder="Enter your password"
-                    />
-
-                    <button
-                        type="button"
-                        className="primary-button"
-                    >
-                        Create Account
-                    </button>
-
-                </form>
-
-            </div>
-
-        </section>
-    );
-}
 
 export default App;

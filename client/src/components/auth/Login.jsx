@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./auth.css";
+import API_URL from "../../api";
 
 function Login({ onLoginSuccess, onRegister }) {
 
@@ -23,7 +24,7 @@ function Login({ onLoginSuccess, onRegister }) {
         try {
 
             const response = await fetch(
-                "http://localhost:5000/api/auth/login",
+                `${API_URL}/auth/login`,
                 {
                     method: "POST",
 

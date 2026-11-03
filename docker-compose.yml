@@ -3,7 +3,7 @@ services:
     image: mysql:8.0
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?Set MYSQL_ROOT_PASSWORD in your environment}
       MYSQL_DATABASE: student_task_management
     ports:
       - "3307:3306"
@@ -11,7 +11,7 @@ services:
       - mysql_data:/var/lib/mysql
       - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-prootpassword"]
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -p\"$${MYSQL_ROOT_PASSWORD}\""]
       interval: 5s
       timeout: 5s
       retries: 10
@@ -23,10 +23,10 @@ services:
       PORT: 5000
       DB_HOST: database
       DB_USER: root
-      DB_PASSWORD: rootpassword
+      DB_PASSWORD: ${MYSQL_ROOT_PASSWORD:?Set MYSQL_ROOT_PASSWORD in your environment}
       DB_NAME: student_task_management
       DB_PORT: 3306
-      JWT_SECRET: change_this_to_a_long_random_secret
+      JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET in your environment}
     ports:
       - "5000:5000"
     depends_on:
@@ -36,6 +36,8 @@ services:
   frontend:
     build: ./client
     restart: unless-stopped
+    environment:
+      VITE_API_PROXY_TARGET: http://backend:5000
     ports:
       - "5173:5173"
     depends_on:
